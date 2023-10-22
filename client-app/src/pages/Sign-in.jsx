@@ -27,12 +27,17 @@ try{
     const data = await res.json();
     console.log(data);
     setLoading(false)
+    if(data.success==false){
+      setError(true)
+      return
+    }
     setError(false)
+
  
 }
 catch(error){
   setLoading(false)
-    setError(error.message)
+    setError(true)
   console.log(error.message);
 }
   }
@@ -47,16 +52,18 @@ catch(error){
       <input type='email' placeholder='Email' id='email' className='bg-slate-100 rounded-lg p-3 ' onChange={handleChange}/>
 
       <input type='password' placeholder='password' id='password' className='bg-slate-100 rounded-lg p-3 '  onChange={handleChange}/>
-      <button className='bg-slate-700 text-white p-3 rounded-lg hover:opacity-95'>{loading?"Loading...":"Sign up"}</button>
+      <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg hover:opacity-95'>{loading?"Loading...":"Sign up"}</button>
       </form>
      ,
       <div className='flex gap-2'>
         <p>Have an account ?</p>
-        <Link to="/Sign-in">
+        <Link to="/Sign-up">
             <span className='text-blue-800'>
           Sign in
             </span>
         </Link>
+
+      <p className='text-red-700'>{error&&"Something went wrong"}</p>
       </div>
     </div>
   )
