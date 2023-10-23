@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import {Link} from "react-router-dom"
+import {Link,useNavigate} from "react-router-dom"
 export default function Signin() {
   const [formData,setformData]=useState({})
   const [error,setError]=useState(false)
   const [loading,setLoading]=useState(false)
+  const navigate=useNavigate()
   const handleChange=(e)=>{
 setformData({...formData,[e.target.id]:e.target.value})
 
@@ -25,6 +26,7 @@ try{
   )
     // Handle a successful response
     const data = await res.json();
+
     console.log(data);
     setLoading(false)
     if(data.success==false){
@@ -33,7 +35,7 @@ try{
     }
     setError(false)
 
- 
+ navigate("/Sign-up")
 }
 catch(error){
   setLoading(false)
@@ -52,7 +54,7 @@ catch(error){
       <input type='email' placeholder='Email' id='email' className='bg-slate-100 rounded-lg p-3 ' onChange={handleChange}/>
 
       <input type='password' placeholder='password' id='password' className='bg-slate-100 rounded-lg p-3 '  onChange={handleChange}/>
-      <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg hover:opacity-95'>{loading?"Loading...":"Sign up"}</button>
+      <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg hover:opacity-95'>{loading?"Loading...":"SIGN UP"}</button>
       </form>
      ,
       <div className='flex gap-2'>

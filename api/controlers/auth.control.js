@@ -31,7 +31,7 @@ if(!validpassword)return next(errorhandler(404,"not udentils"))
 const token=jwt.sign({id:validuser._id},process.env.JWT_SECRET)
 const {password:hashedpassword,...rest}=validuser._doc
 const expireDate=new Date().now()+360000 //1 hour
-res
+rest
 .cookie('access_token',token,{httpOnly:true,expires:expireDate})
 .status(200).json(rest)   
 }
